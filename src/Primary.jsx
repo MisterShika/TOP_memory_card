@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Game from './Game';
 
 function Primary () {
     const [kanjiData, setKanjiData] = useState([]);
@@ -26,7 +27,12 @@ function Primary () {
         <>
             Hello World  
             {
-                kanjiData ? kanjiData : 'Loading...' 
+                kanjiData 
+                    ? 
+                    
+                    <Game kanjiData={kanjiData} seenKanji={seenKanji} setSeenKanji={setSeenKanji} />
+                    : 
+                    'Loading...' 
             }
             Test
         </>

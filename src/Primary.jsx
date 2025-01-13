@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Game from './Game';
 
 function Primary () {
     const [kanjiData, setKanjiData] = useState([]);
-    const [seenKanji, setSeenKanji] = useState([]);
+    
 
     //Effect for getting kanji dataset on initialization.
     useEffect(() => {
@@ -24,18 +24,15 @@ function Primary () {
     }, [] );
 
     return(
-        <>
-            Hello World  
+        <div className="gameContainer">
             {
                 kanjiData 
                     ? 
-                    
-                    <Game kanjiData={kanjiData} seenKanji={seenKanji} setSeenKanji={setSeenKanji} />
+                    <Game kanjiData={kanjiData} />
                     : 
                     'Loading...' 
             }
-            Test
-        </>
+        </div>
     );
 }
 

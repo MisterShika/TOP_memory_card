@@ -1,16 +1,40 @@
-function Game ({kanjiData, seenKanji, setSeenKanji}) {
+import { useEffect, useState } from 'react';
 
-    
+function Game ({kanjiData}) {
+    const [seenKanji, setSeenKanji] = useState([]);
+    const [displayedKanji, setDisplayedKanji] = useState([]);
 
-    const getRandomKanji = (kanjiArray) => {
-        const randomNumber = Math.floor(Math.random() * kanjiArray.length);
-        return kanjiArray[randomNumber];
+
+
+    const kanjiInArray = (kanji, kanjiArray) => {
+        kanjiArray.some(item => item === kanji) ? true : false;
     }
+
+    const getRandomKanji = (amount, kanjiArray) => {
+        const returnArray = [];
+        while(returnArray.length != amount){
+            let randomNumber = Math.floor(Math.random() * kanjiArray.length);
+            let genKanji = kanjiArray[randomNumber];
+            if(kanjiInArray(genKanji, returnArray) === true){
+                continue;
+            }else{
+                returnArray.push(genKanji);
+            }
+        }
+        return returnArray;
+    }
+
+    useEffect(() => {
+        setDisplayedKanji(getRandomKanji(9, kanjiData));
+        console.log(displayedKanji);
+    }, [kanjiData]);
 
     return (
         <div className="display-kanji">
             {
-                getRandomKanji(kanjiData)
+                displayedKanji.map((kanji, index) => {
+                    return <div key={index} className="kanji-card">{kanji}</div>;
+                })
             }
         </div>
     );

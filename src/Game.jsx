@@ -4,36 +4,49 @@ function Game ({kanjiData}) {
     const [seenKanji, setSeenKanji] = useState([]);
     const [displayedKanji, setDisplayedKanji] = useState([]);
 
-
-
-    const kanjiInArray = (kanji, kanjiArray) => {
-        kanjiArray.some(item => item === kanji) ? true : false;
+    //Clicking card adds kanji to "seen" array
+    const cardClick = (kanji) => {
+        if(seenKanji.includes(kanji)){
+            console.log("EXISTS! RESET!");
+            setDisplayedKanji(getRandomKanji(9, kanjiData));
+            setSeenKanji([]);
+        }else{
+            setSeenKanji([
+                ...seenKanji,
+                kanji
+            ]);
+        }
     }
 
+    //Returns X number of kanji
     const getRandomKanji = (amount, kanjiArray) => {
         const returnArray = [];
         while(returnArray.length != amount){
             let randomNumber = Math.floor(Math.random() * kanjiArray.length);
             let genKanji = kanjiArray[randomNumber];
-            if(kanjiInArray(genKanji, returnArray) === true){
-                continue;
-            }else{
+            if(!returnArray.includes(genKanji)){
                 returnArray.push(genKanji);
+            }else{
+                console.log("DUPLICATE!");
             }
         }
         return returnArray;
     }
 
+    //Populating Kanji on initialization as well as after clicking
+    //a card and adding it to "seen"
     useEffect(() => {
-        setDisplayedKanji(getRandomKanji(9, kanjiData));
-        console.log(displayedKanji);
-    }, [kanjiData]);
+        if(kanjiData.length > 0){
+            setDisplayedKanji(getRandomKanji(9, kanjiData));
+            console.log(`Testing seen kanji: ${seenKanji}`);
+        }
+    }, [kanjiData, seenKanji]);
 
     return (
         <div className="display-kanji">
             {
                 displayedKanji.map((kanji, index) => {
-                    return <div key={index} className="kanji-card">{kanji}</div>;
+                    return <div key={index} onClick={() => cardClick(kanji)} className="kanji-card">{kanji}</div>;
                 })
             }
         </div>

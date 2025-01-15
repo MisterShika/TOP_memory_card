@@ -4,6 +4,7 @@ import Game from './Game';
 function Primary () {
     const [kanjiData, setKanjiData] = useState([]);
     
+    
 
     //Effect for getting kanji dataset on initialization.
     useEffect(() => {

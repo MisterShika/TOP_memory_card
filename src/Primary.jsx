@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 import Game from './Game';
+import ScoreGUI from './ScoreGUI';
+import GameTitle from './GameTitle';
 
 function Primary () {
     const [kanjiData, setKanjiData] = useState([]);
-    
-    
+    const [score, setScore] = useState(0);
+    const [gradeLevel, setGradeLevel] = useState();
 
     //Effect for getting kanji dataset on initialization.
     useEffect(() => {
         const getInitialData = async () => {
-            const response = await fetch('https://kanjiapi.dev/v1/kanji/grade-1');
+            // const response = await fetch('https://kanjiapi.dev/v1/kanji/grade-1');
+            const response = await fetch(`https://kanjiapi.dev${gradeLevel}`);
             const data = await response.json();
             return data;
         }
@@ -22,16 +25,30 @@ function Primary () {
             }
         };
         fetchData();
-    }, [] );
+    }, [gradeLevel] );
 
     return(
         <div className="gameContainer">
             {
-                kanjiData 
+                gradeLevel
                     ? 
-                    <Game kanjiData={kanjiData} />
+                    <div>
+                        <Game 
+                        kanjiData={kanjiData} 
+                        setScore={setScore} 
+                        setGradeLevel={setGradeLevel} />
+                        <ScoreGUI 
+                        score={score}
+                        setGradeLevel={setGradeLevel} 
+                        />
+                    </div>
                     : 
-                    'Loading...' 
+                    <div>
+                        <GameTitle 
+                        score={score}
+                        setScore={setScore} 
+                        setGradeLevel={setGradeLevel} />
+                    </div>
             }
         </div>
     );

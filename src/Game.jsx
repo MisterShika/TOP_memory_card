@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function Game ({kanjiData}) {
+function Game ({kanjiData, setScore, setGradeLevel}) {
     const [seenKanji, setSeenKanji] = useState([]);
     const [displayedKanji, setDisplayedKanji] = useState([]);
 
@@ -8,9 +8,12 @@ function Game ({kanjiData}) {
     const cardClick = (kanji) => {
         if(seenKanji.includes(kanji)){
             console.log("EXISTS! RESET!");
+            //Reset game
             setDisplayedKanji(getRandomKanji(9, kanjiData));
             setSeenKanji([]);
+            setGradeLevel();
         }else{
+            setScore(prevCount => prevCount + 1);
             setSeenKanji([
                 ...seenKanji,
                 kanji
@@ -18,7 +21,7 @@ function Game ({kanjiData}) {
         }
     }
 
-    //Returns X number of kanji
+    //Returns X number of UNIQUE kanji
     const getRandomKanji = (amount, kanjiArray) => {
         const returnArray = [];
         while(returnArray.length != amount){

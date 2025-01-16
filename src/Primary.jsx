@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Game from './Game';
-import ScoreGUI from './ScoreGUI';
 import GameTitle from './GameTitle';
 
 function Primary () {
@@ -35,12 +34,9 @@ function Primary () {
                     <div>
                         <Game 
                         kanjiData={kanjiData} 
+                        score={score}
                         setScore={setScore} 
                         setGradeLevel={setGradeLevel} />
-                        <ScoreGUI 
-                        score={score}
-                        setGradeLevel={setGradeLevel} 
-                        />
                     </div>
                     : 
                     <div>

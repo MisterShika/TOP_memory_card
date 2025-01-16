@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import ScoreGUI from './ScoreGUI';
 
-function Game ({kanjiData, setScore, setGradeLevel}) {
+function Game ({kanjiData, score, setScore, setGradeLevel}) {
     const [seenKanji, setSeenKanji] = useState([]);
     const [displayedKanji, setDisplayedKanji] = useState([]);
+    const [countdown, setCountdown] = useState(0);
 
     //Clicking card adds kanji to "seen" array
     const cardClick = (kanji) => {
@@ -13,7 +15,8 @@ function Game ({kanjiData, setScore, setGradeLevel}) {
             setSeenKanji([]);
             setGradeLevel();
         }else{
-            setScore(prevCount => prevCount + 1);
+            const score = countdown > 0 ? countdown : 1;
+            setScore(prevCount => prevCount + score);
             setSeenKanji([
                 ...seenKanji,
                 kanji
@@ -45,13 +48,37 @@ function Game ({kanjiData, setScore, setGradeLevel}) {
         }
     }, [kanjiData, seenKanji]);
 
-    return (
-        <div className="display-kanji">
-            {
-                displayedKanji.map((kanji, index) => {
-                    return <div key={index} onClick={() => cardClick(kanji)} className="kanji-card">{kanji}</div>;
-                })
+    //Timer initializes each time the displayed kanji changes
+    //(e.g. upon game initialization and after progressing in the game)
+    useEffect(() => {
+        setCountdown(5); 
+        const timer = setInterval(() => {
+          setCountdown(prevCountdown => {
+            if (prevCountdown <= 1) {
+              clearInterval(timer);
+              return 0;
             }
+            return prevCountdown - 1;
+          });
+        }, 1000);
+    
+        return () => clearInterval(timer); 
+    }, [displayedKanji]);
+
+    return (
+        <div>
+            <ScoreGUI
+                score={score}
+                setGradeLevel={setGradeLevel}
+                countdown={countdown}
+            />
+            <div className="display-kanji">
+                {
+                    displayedKanji.map((kanji, index) => {
+                        return <div key={index} onClick={() => cardClick(kanji)} className="kanji-card">{kanji}</div>;
+                    })
+                }
+            </div>
         </div>
     );
 }

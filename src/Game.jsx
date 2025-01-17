@@ -15,7 +15,7 @@ function Game ({kanjiData, score, setScore, setGradeLevel}) {
             setSeenKanji([]);
             setGradeLevel();
         }else{
-            const score = countdown > 0 ? countdown : 1;
+            const score = countdown > 0 ? Math.ceil(countdown / 10) : 1;
             setScore(prevCount => prevCount + score);
             setSeenKanji([
                 ...seenKanji,
@@ -51,18 +51,19 @@ function Game ({kanjiData, score, setScore, setGradeLevel}) {
     //Timer initializes each time the displayed kanji changes
     //(e.g. upon game initialization and after progressing in the game)
     useEffect(() => {
-        setCountdown(5); 
-        const timer = setInterval(() => {
-          setCountdown(prevCountdown => {
-            if (prevCountdown <= 1) {
-              clearInterval(timer);
-              return 0;
-            }
-            return prevCountdown - 1;
-          });
-        }, 1000);
-    
-        return () => clearInterval(timer); 
+        if(displayedKanji.length > 0){
+            setCountdown(50); 
+            const timer = setInterval(() => {
+            setCountdown(prevCountdown => {
+                if (prevCountdown <= 1) {
+                clearInterval(timer);
+                return 0;
+                }
+                return prevCountdown - 1;
+            });
+            }, 100);
+            return () => clearInterval(timer); 
+         }
     }, [displayedKanji]);
 
     return (

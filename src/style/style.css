@@ -16,7 +16,7 @@
     height: 100%;
     max-height: 100vw;
     box-sizing: border-box;
-    padding: 20px 0;
+    padding: 30px 0;
 }
 .kanji-card{
     display: flex;
@@ -33,4 +33,21 @@
 
 html, body, #root, .gameContainer, .display-kanji{
     height: 100%;
+}
+
+/** Progress Bar**/
+.progress-container{
+    display: inline-block;
+    position: relative;
+    height: 20px;
+    width: 250px;
+    border: 1px solid black;
+}
+.progress-bar{
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%; width: 100%;
+    background-color: black;
+    transition: width 0.1s ease-in-out;
 }

@@ -67,7 +67,7 @@ function Game ({kanjiData, score, setScore, setGradeLevel}) {
     }, [displayedKanji]);
 
     return (
-        <div>
+        <>
             <ScoreGUI
                 score={score}
                 setGradeLevel={setGradeLevel}
@@ -76,11 +76,11 @@ function Game ({kanjiData, score, setScore, setGradeLevel}) {
             <div className="display-kanji">
                 {
                     displayedKanji.map((kanji, index) => {
-                        return <div key={index} onClick={() => cardClick(kanji)} className="kanji-card">{kanji}</div>;
+                        return <div key={index} onClick={() => cardClick(kanji)} className="kanji-card"><span>{kanji}</span></div>;
                     })
                 }
             </div>
-        </div>
+        </>
     );
 }
 

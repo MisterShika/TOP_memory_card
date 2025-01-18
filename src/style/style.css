@@ -1,3 +1,9 @@
+body{
+    background: url(../assets/background.jpeg);
+    background-size: cover; /* Ensures the image covers the entire element */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat;
+}
 .gameContainer{
     
 }
@@ -29,6 +35,9 @@
     padding: 20px; 
     text-align: center; 
     cursor: pointer;
+}
+.kanji-card span{
+    background: url(../assets/texture2.png);
 }
 
 html, body, #root, .gameContainer, .display-kanji{

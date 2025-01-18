@@ -31,20 +31,20 @@ function Primary () {
             {
                 gradeLevel
                     ? 
-                    <div>
+                    <>
                         <Game 
                         kanjiData={kanjiData} 
                         score={score}
                         setScore={setScore} 
                         setGradeLevel={setGradeLevel} />
-                    </div>
+                    </>
                     : 
-                    <div>
+                    <>
                         <GameTitle 
                         score={score}
                         setScore={setScore} 
                         setGradeLevel={setGradeLevel} />
-                    </div>
+                    </>
             }
         </div>
     );

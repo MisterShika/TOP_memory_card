@@ -19,13 +19,17 @@ function ScoreGUI ({score, setGradeLevel, countdown}) {
 
     return (
         <div className="gui-container">
-            <div className="score-container">
-                Score: {score}
+            <div className="upper-container">
+                <div className="score-container">
+                    Score: {score}
+                </div>
+                <div className="progress-container">
+                    <div className="progress-bar" style={style}></div>
+                </div>
             </div>
-            <div className="progress-container">
-                <div className="progress-bar" style={style}></div>
+            <div className="quit-container">
+                <button onClick={quitToMenu} className="quit-button">Quit</button>
             </div>
-            <button onClick={quitToMenu}>Quit</button>
         </div>
     );
 }

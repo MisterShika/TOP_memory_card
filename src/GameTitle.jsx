@@ -13,26 +13,27 @@ function GameTitle ({score, setScore, setGradeLevel}) {
     }
 
     return (
-        <div className="title-block">
-            {
-                score >= 1 ?
-                    <div>
-                        You scored {score} points. Try again?
-                    </div>
-                    :
-                    <span>Kanji Game!</span>
-            }
-            <label htmlFor="options">Choose a grade:</label>
-            <select id="options" value={selectedOption} onChange={handleChange}>
-                <option value="" disabled>Select an option</option>
-                <option value="/v1/kanji/grade-1">Grade 1</option>
-                <option value="/v1/kanji/grade-2">Grade 2</option>
-                <option value="/v1/kanji/grade-3">Grade 3</option>
-                <option value="/v1/kanji/grade-4">Grade 4</option>
-                <option value="/v1/kanji/grade-5">Grade 5</option>
-                <option value="/v1/kanji/grade-6">Grade 6</option>
-            </select>
-            <button onClick={startGame}>Start</button>
+        <div className="title-container">
+            <div className="title-block">
+                {
+                    score >= 1 ?
+                        <div>
+                            You scored {score} points. Try again?
+                        </div>
+                        :
+                        <h1>Kanji Memory!</h1>
+                }
+                <label htmlFor="options">Choose a JLPT level:</label>
+                <select id="options" value={selectedOption} onChange={handleChange}>
+                    <option value="" disabled>Select an option</option>
+                    <option value="n5">JLPT N5</option>
+                    <option value="n4">JLPT N4</option>
+                    <option value="n3">JLPT N3</option>
+                    <option value="n2">JLPT N2</option>
+                    <option value="n1">JLPT N1</option>
+                </select>
+                <button onClick={startGame} className="start-button">Start</button>
+            </div>
         </div>
     );
 }

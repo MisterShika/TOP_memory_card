@@ -1,12 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Zen+Maru+Gothic&display=swap');
+
+/** Structure **/
 body{
     background: url(../assets/background.jpeg);
-    background-size: cover; /* Ensures the image covers the entire element */
-    background-position: center; /* Centers the image */
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
 }
-.gameContainer{
-    
+#root{
+    background-color: hsl(0deg 0% 0% / 50%);
 }
+html, body, #root, .gameContainer, .display-kanji, .title-container{
+    height: 100%;
+}
+
+/** Card Area **/
 .display-kanji{
     display: flex;
     flex-wrap: wrap;
@@ -31,32 +39,178 @@ body{
     font-size: 3em;
     flex: 1 0 33.33%;
     box-sizing: border-box;
-    border: 1px solid #000; 
-    padding: 20px; 
     text-align: center; 
-    cursor: pointer;
-}
-.kanji-card span{
-    background: url(../assets/texture2.png);
 }
 
-html, body, #root, .gameContainer, .display-kanji{
-    height: 100%;
+@keyframes bg-transition {
+    0% {
+      background-image: url(../assets/texture2.png);
+    }
+    100% {
+      background-image: url(../assets/textureSelect.png);
+    }
+  }
+
+.kanji-card span{
+    background-image: url(../assets/texture2.png);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+    cursor: pointer;
+    border-radius: 20px;
+    -webkit-box-shadow: 
+        0px 0px 5px 5px rgba(0,0,0,0.75), 
+        5px 5px 10px rgba(0, 0, 0, 0.5), 
+        -5px -5px 10px rgba(255, 255, 255, 0.3);
+    -moz-box-shadow: 
+        0px 0px 5px 5px rgba(0,0,0,0.75), 
+        5px 5px 10px rgba(0, 0, 0, 0.5), 
+        -5px -5px 10px rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0px 0px 5px 5px rgba(0,0,0,0.75), 
+        5px 5px 10px rgba(0, 0, 0, 0.5), 
+        -5px -5px 10px rgba(255, 255, 255, 0.3);
+    text-shadow: 
+        1px 1px 2px #fff,
+        -1px -1px 2px #000;
+    transition: transform 0.2s, background-color 0.2s;
+    font-family: "Zen Maru Gothic", serif;
+    font-size: 2em;
+    font-weight: 500;
+    
 }
+.kanji-card span:active{
+    transform: scale(0.95);
+}
+.kanji-card span:hover{
+    background-image: url(../assets/textureSelect.png);
+    animation: bg-transition .5s alternate;
+}
+.kanji-card span::selection{
+    background: transparent;
+}
+
+
 
 /** Progress Bar**/
 .progress-container{
     display: inline-block;
     position: relative;
     height: 20px;
-    width: 250px;
+    width: 100%;
+    margin: 0 10px;
     border: 1px solid black;
+    box-sizing: border-box;
+    border-radius: 7px;
 }
 .progress-bar{
     display: block;
     position: absolute;
     top: 0; left: 0;
     height: 100%; width: 100%;
-    background-color: black;
     transition: width 0.1s ease-in-out;
+    border-radius: 7px;
+}
+
+/** UI **/
+.title-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.title-block{
+    background-color: rgb(255 255 255 / 85%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Quicksand", serif;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    padding-bottom: 20px;
+}
+.title-block h1{
+    font-family: "Quicksand", serif;
+    font-size: 2.5em;
+    line-height: 2em;
+    font-weight: bold;
+    background: -webkit-linear-gradient(#113a43, #031f30);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.title-block select,
+.title-block option{
+    font-family: "Quicksand", serif;
+    font-size: .9em;
+    line-height: .9em;
+    border-radius: 10px;
+    padding: 0 5px;
+}
+.gui-container{
+    position: relative;
+    z-index: 10;
+    background: #ecffff;
+}
+.gui-container::after{
+    display: block;
+    position:absolute;
+    top: 100%;
+    content: '';
+    height: 10px;
+    width: 100%;
+    background: linear-gradient(to bottom, rgb(154 246 255) 0%, rgba(255, 255, 255, 0) 100%);
+}
+.upper-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 10px 10px 10px;
+    font-family: "Quicksand", serif;
+}
+.score-container{
+    font-size: 1.5em;
+    background: -webkit-linear-gradient(#113a43, #031f30);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.progress-container{
+    margin-top: 10px;
+}
+.quit-container{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    background: #ecffff;
+}
+.quit-container::before{
+    display: block;
+    position: absolute;
+    top: -10px;
+    content: '';
+    height: 10px;
+    width: 100%;
+    background: linear-gradient(to top, rgb(154 246 255) 0%, rgba(255, 255, 255, 0) 100%);
+}
+.start-button,
+.quit-button{
+    cursor: pointer;
+    margin: 10px 0;
+    background: none;
+    border: none;
+    font-family: "Quicksand", serif;
+    font-size: 1.25em;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #113a43 0%, #031f30 100%);
+    padding: 5px 50px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #fff;
 }

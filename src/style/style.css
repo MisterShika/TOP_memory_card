@@ -129,18 +129,19 @@ html, body, #root, .gameContainer, .display-kanji, .title-container{
     font-family: "Quicksand", serif;
     font-size: 1.5em;
     line-height: 1.5em;
-    padding-bottom: 20px;
+    padding: 10px 5px 20px 5px;
 }
 .title-block h1{
     font-family: "Quicksand", serif;
     font-size: 2.5em;
-    line-height: 2em;
+    line-height: 1.25em;
     font-weight: bold;
     background: -webkit-linear-gradient(#113a43, #031f30);
     -webkit-background-clip: text;
     background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-align:center;
 }
 .title-block select,
 .title-block option{
@@ -233,5 +234,10 @@ html, body, #root, .gameContainer, .display-kanji, .title-container{
 @media (max-width: 600px){
     .display-kanji{
         padding: 0;
+    }
+}
+@media (max-width: 400px){
+    .kanji-card span{
+        font-size: 1.2em;
     }
 }

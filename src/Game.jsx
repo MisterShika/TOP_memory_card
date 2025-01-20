@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import ScoreGUI from './ScoreGUI';
 
-function Game ({kanjiData, score, setScore, setGradeLevel}) {
+function Game ({kanjiData, score, setScore, setGradeLevel, titleKanji, setTitleKanji}) {
     const [seenKanji, setSeenKanji] = useState([]);
     const [displayedKanji, setDisplayedKanji] = useState([]);
     const [countdown, setCountdown] = useState(0);
 
     //Clicking card adds kanji to "seen" array
     const cardClick = (kanji) => {
+        setTitleKanji([
+            ...titleKanji,
+            kanji
+        ]);
         if(seenKanji.includes(kanji)){
             console.log("EXISTS! RESET!");
             //Reset game

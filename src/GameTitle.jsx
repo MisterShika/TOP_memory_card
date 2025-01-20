@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function GameTitle ({score, setScore, setGradeLevel}) {
+function GameTitle ({score, setScore, setGradeLevel, titleKanji, setTitleKanji}) {
     const [selectedOption, setSelectedOption] = useState('');
 
     const handleChange = (event) => {
@@ -10,6 +10,7 @@ function GameTitle ({score, setScore, setGradeLevel}) {
     const startGame = () => {
         setGradeLevel(selectedOption);
         setScore(0);
+        setTitleKanji([]);
     }
 
     return (
@@ -17,7 +18,14 @@ function GameTitle ({score, setScore, setGradeLevel}) {
             <div className="title-block">
                 {
                     score >= 1 ?
-                        <div>
+                        <div className="prev-game-info">
+                            <div className="prev-game-kanji">
+                                {
+                                    titleKanji.map((gotKanji, index) => {
+                                        return <span key={index}>{gotKanji}</span>;
+                                    })
+                                }
+                            </div>
                             You scored {score} points. Try again?
                         </div>
                         :

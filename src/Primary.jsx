@@ -6,6 +6,7 @@ function Primary () {
     const [kanjiData, setKanjiData] = useState([]);
     const [score, setScore] = useState(0);
     const [gradeLevel, setGradeLevel] = useState();
+    const [titleKanji, setTitleKanji] = useState([]);
 
     const jlptN5Kanji = [
         "日", "一", "国", "人", "年", "大", "十", "二", "本", "中",
@@ -124,14 +125,18 @@ function Primary () {
                         kanjiData={kanjiData} 
                         score={score}
                         setScore={setScore} 
-                        setGradeLevel={setGradeLevel} />
+                        setGradeLevel={setGradeLevel}
+                        titleKanji={titleKanji}
+                        setTitleKanji={setTitleKanji} />
                     </>
                     : 
                     <>
                         <GameTitle 
                         score={score}
                         setScore={setScore} 
-                        setGradeLevel={setGradeLevel} />
+                        setGradeLevel={setGradeLevel}
+                        titleKanji={titleKanji}
+                        setTitleKanji={setTitleKanji} />
                     </>
             }
         </div>

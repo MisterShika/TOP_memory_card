@@ -1,8 +1,5 @@
-# React + Vite
+# Kanji Memory
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Screenshot](./screenshot.jpg)
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Kanji Memory is take on the standard memory game. Clicking a tile refreshes all nine tiles and stores that particular kanji in memory. If you click on a kanji that you've clicked on previously that is a game over. Higher points are awarded the faster you click through kanji selections. Different difficulties are available based on different sets of Kanji (although only N5 is likely accurate).
